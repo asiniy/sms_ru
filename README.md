@@ -1,6 +1,7 @@
 # SmsRu
 
 [![Gem Version](https://badge.fury.io/rb/smsru.png)](http://badge.fury.io/rb/smsru)
+[![Code Climate](https://codeclimate.com/github/asiniy/sms_ru/badges/gpa.svg)](https://codeclimate.com/github/asiniy/sms_ru)
 
 This gem is API for sending sms through [sms.ru](http://sms.ru) service. SmsRu allows you to connect to sms.ru api without Net::HTTP syntax sugar. Check [API](http://sms.ru/?panel=api) to list of all available queries.
 
