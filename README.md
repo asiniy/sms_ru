@@ -7,21 +7,17 @@ This gem is API for sending sms through [sms.ru](http://sms.ru) service. SmsRu a
 
 ## Installation
 
-**WARNING** There is obsolete ruby gem `sms_ru`, so name of this gem is '**smsru**'
+**WARNING** There is outdated ruby gem `sms_ru`, so name of this gem is `**smsru**`
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'smsru'
+gem 'smsru', require: 'sms_ru'
 ```
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install smsru
 
 ## Usage
 
@@ -30,8 +26,8 @@ Firstly, add `sms_ru.rb` to initializers. Here you can set api_id.
 ``` ruby
   SmsRu.setup do |config|
     config.api_id = Rails.application.secrets.sms_ru_key
-    ### you can setup default settings for every sms.ru API method you want
-    config.methods.sms.send.from = 'fasteria.ru'
+    ### you can setup default settings for every sms.ru API query you want
+    config.queries.sms.send.from = 'fasteria.ru'
   end
 ```
 
@@ -40,6 +36,21 @@ Firstly, add `sms_ru.rb` to initializers. Here you can set api_id.
   SmsRu.my.balance # => '100\n87.79'
   # et.c.
 ```
+
+You can specify `delivery_method` for SmsRu gateway. For example, if you don't want to send a messages, but don't want to make queries to the API:
+
+``` ruby
+  # config/environments/development.rb
+  config.sms_ru.delivery_method = :launchy # every query to sms.ru api will open new tab in the browser
+```
+
+``` ruby
+  # config/environments/test.rb
+  config.sms_ru.delivery_method = :webmock # you'll get mocked success answer
+```
+
+Default `delivery_method` is `:direct`
+
 
 ## Contributing
 

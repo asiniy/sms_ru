@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Sms.ru api <%= @request[:method] %> call</title>
+  </head>
+
+  <body>
+    <h3>Sms.ru query</h3>
+    <table cellspacing="5">
+      <thead>
+        <th>Param</th>
+        <th align="left">Value</th>
+      </thead>
+      <tbody>
+        <% @request.each do |k, v| %>
+          <tr>
+            <td><i><%= k %></i></td>
+            <td><%= v %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>
