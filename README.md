@@ -21,15 +21,32 @@ And then execute:
 
 ## Usage
 
-Firstly, add `sms_ru.rb` to initializers. Here you can set api_id.
+After you add 'sms_ru' to your Gemfile, you need to run the
+generator:
+
+```console
+rails generate sms_ru:install
+```
+
+The generator will install an initializer to
+`config/initializers/sms_ru.rb`. Here you can set app_id
 
 ``` ruby
   SmsRu.setup do |config|
     config.api_id = Rails.application.secrets.sms_ru_key
-    ### you can setup default settings for every sms.ru API query you want
+  end
+```
+
+Also you can setup default settings for every sms.ru API query
+
+``` ruby
+  SmsRu.setup do |config|
+    ...
     config.queries.sms.send.from = 'fasteria.ru'
   end
 ```
+
+Example:
 
 ``` ruby
   SmsRu.sms.send(api_id: 'abcdef', to: '79112223344', text: 'Sample message') # => '100\n000-00000'
