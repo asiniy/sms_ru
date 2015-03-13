@@ -24,7 +24,7 @@ module SmsRu
           end
         end
       when :direct then nil
-      else raise 'undefined sms_ru delivery_method'
+      else raise SmsRu::DeliveryMethodError, "undefined sms_ru delivery_method '#{app.config.sms_ru.delivery_method}'"
       end
     end
   end

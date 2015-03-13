@@ -4,6 +4,7 @@ require 'net/http'
 
 require 'sms_ru/version'
 require 'sms_ru/config'
+require 'sms_ru/error'
 require 'sms_ru/railtie' if defined?(Rails)
 
 module SmsRu
@@ -38,8 +39,8 @@ module SmsRu
 
       response = Net::HTTP.post_form(uri, query_options)
 
-      raise 'you have troubles with internet connection or API query is missing' unless response.kind_of? Net::HTTPSuccess
-      raise "something going wrong: #{query_options}, #{response.body}" unless response.body.match(/^100/)
+      raise SmsRu::ConnectionError, 'you have troubles with internet connection or API query is missing' unless response.kind_of? Net::HTTPSuccess
+      raise SmsRu::APIError, "something going wrong: query_options => #{query_options}, uri => #{uri}, response => #{response.body}" unless response.body.match(/^100/)
       response.body.split("\n")
     else
       @@stack_method = m
